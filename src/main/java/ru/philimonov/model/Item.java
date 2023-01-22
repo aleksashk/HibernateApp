@@ -18,12 +18,13 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="item_name")
+    private String itemName;
+
     @ManyToOne
     @JoinColumn(name="person_id", referencedColumnName = ("id"))
     private Person owner;
 
-    @Column(name="item_name")
-    private String itemName;
 
     public Item() {
     }
@@ -32,9 +33,9 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public Item(Person owner, String itemName) {
-        this.owner = owner;
+    public Item(String itemName, Person owner) {
         this.itemName = itemName;
+        this.owner = owner;
     }
 
     public Person getOwner() {

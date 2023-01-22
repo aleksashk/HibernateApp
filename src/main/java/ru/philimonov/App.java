@@ -7,7 +7,8 @@ import org.hibernate.cfg.Configuration;
 import ru.philimonov.model.Item;
 import ru.philimonov.model.Person;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class App {
     public static void main(String[] args) {
@@ -16,10 +17,11 @@ public class App {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-            Person person = session.get(Person.class, 2);
-            Item item = new Item(person, "LapTop");
-            session.save(item);
-            System.out.println(person.getItemList());
+            Person person = new Person("new Person", 24);
+            Item newItem = new Item("Item from Hibernate", person);
+            person.setItemList(new ArrayList<>(Collections.singletonList(newItem)));
+            session.save(person);
+            session.save(newItem);
             session.getTransaction().commit();
 
         } catch (HibernateException e) {
