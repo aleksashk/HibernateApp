@@ -7,6 +7,8 @@ import org.hibernate.cfg.Configuration;
 import ru.philimonov.model.Item;
 import ru.philimonov.model.Person;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         Configuration configuration = new Configuration().addAnnotatedClass(Person.class).addAnnotatedClass(Item.class);
@@ -14,11 +16,11 @@ public class App {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-            Person person = session.get(Person.class, 4);
-            Item item = session.get(Item.class, 1);
-            item.getOwner().getItemList().remove(item);
-            item.setOwner(person);
-            person.getItemList().add(item);
+            List<Person> people = session.createQuery("from Person where age < 30 and name like 'H%'").getResultList();
+            for (Person p : people) {
+                System.out.println(p);
+            }
+
             session.getTransaction().commit();
 
         } catch (HibernateException e) {
