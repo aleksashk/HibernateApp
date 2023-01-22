@@ -16,23 +16,10 @@ public class App {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-
-            Person person = session.get(Person.class, 3);
-            List<Item> itemList = person.getItemList();
-            System.out.println(itemList);
-
-            Item item = session.get(Item.class, 5);
-            Person owner = item.getOwner();
-            System.out.println("owner is: " + owner);
-
-            Person person1 = session.get(Person.class, 2);
-            List<Item> itemList1 = person1.getItemList();
-            Item item1 = new Item("Chicken");
-            itemList1.add(item1);
-            System.out.println(itemList1 + " owner is " + person1);
-
-            Item item2 = session.get(Item.class, 7);
-            System.out.println(item2.getOwner());
+            Person person = session.get(Person.class, 2);
+            Item item = new Item(person, "LapTop");
+            session.save(item);
+            System.out.println(person.getItemList());
             session.getTransaction().commit();
 
         } catch (HibernateException e) {
