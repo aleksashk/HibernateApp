@@ -13,16 +13,13 @@ public class App {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-            Person person1 = new Person("Test Person 1", 25);
-            Person person2 = new Person("Test Person 2", 26);
-            Person person3 = new Person("Test Person 3", 27);
-            Person person4 = new Person("Test Person 4", 28);
-
+            Person person = session.get(Person.class, 10);
+            Person person1 = new Person("Some name for Person", 56);
+            person.setName("New test name");
             session.save(person1);
-            session.save(person2);
-            session.save(person3);
-            session.save(person4);
+            session.delete(person);
             session.getTransaction().commit();
+            System.out.println(person1.getId());
         } catch (HibernateException e) {
             throw new RuntimeException(e);
         } finally {
