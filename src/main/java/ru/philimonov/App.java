@@ -22,7 +22,7 @@ public class App {
             Item item = new Item("Test item", person);
 
             person.setItemList(new ArrayList<>(Collections.singletonList(item)));
-            session.persist(person);
+            session.save(person);
             session.getTransaction().commit();
 
         } catch (HibernateException e) {

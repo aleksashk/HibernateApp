@@ -1,6 +1,8 @@
 package ru.philimonov.model;
 
-import javax.persistence.CascadeType;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,8 @@ import java.util.List;
 @Table(name = "Person")
 public class Person {
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "owner")
+    @Cascade(CascadeType.SAVE_UPDATE)
     private List<Item> itemList;
 
     @Column(name = "id")
