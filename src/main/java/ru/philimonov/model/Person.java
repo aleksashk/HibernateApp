@@ -5,11 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
 public class Person {
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> itemList;
 
     @Column(name = "id")
     @Id
@@ -26,8 +32,17 @@ public class Person {
     }
 
     public Person(String name, int age) {
+        itemList =  new ArrayList<>();
         this.name = name;
         this.age = age;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public int getId() {
