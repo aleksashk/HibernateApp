@@ -1,9 +1,9 @@
 package ru.philimonov.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Person")
@@ -11,7 +11,7 @@ public class Person {
 
     @Column(name = "id")
     @Id
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -22,17 +22,17 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long id, String name, int age) {
+    public Person(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -50,5 +50,14 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
