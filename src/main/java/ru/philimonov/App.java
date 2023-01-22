@@ -7,6 +7,8 @@ import org.hibernate.cfg.Configuration;
 import ru.philimonov.model.Item;
 import ru.philimonov.model.Person;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class App {
@@ -16,8 +18,11 @@ public class App {
         Session session = factory.getCurrentSession();
         try {
             session.beginTransaction();
-            session.createQuery("delete from Person where age <= 30").executeUpdate();
+            Person person = new Person("Jack", 25);
+            Item item = new Item("Test item", person);
 
+            person.setItemList(new ArrayList<>(Collections.singletonList(item)));
+            session.persist(person);
             session.getTransaction().commit();
 
         } catch (HibernateException e) {

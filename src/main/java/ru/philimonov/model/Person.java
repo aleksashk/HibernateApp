@@ -1,5 +1,6 @@
 package ru.philimonov.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name = "Person")
 public class Person {
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Item> itemList;
 
     @Column(name = "id")
