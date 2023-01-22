@@ -41,6 +41,14 @@ public class Person {
         this.age = age;
     }
 
+    public void addItem(Item item){
+        if(this.itemList==null){
+            this.itemList = new ArrayList<>();
+        }
+        this.itemList.add(item);
+        item.setOwner(this);
+    }
+
     public List<Item> getItemList() {
         return itemList;
     }

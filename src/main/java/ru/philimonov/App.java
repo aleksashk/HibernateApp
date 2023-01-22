@@ -19,9 +19,13 @@ public class App {
         try {
             session.beginTransaction();
             Person person = new Person("Jack", 25);
-            Item item = new Item("Test item", person);
+            Item item1 = new Item("Test item1");
+            Item item2 = new Item("Test item2");
+            Item item3 = new Item("Test item3");
+            person.addItem(item1);
+            person.addItem(item2);
+            person.addItem(item3);
 
-            person.setItemList(new ArrayList<>(Collections.singletonList(item)));
             session.save(person);
             session.getTransaction().commit();
 
