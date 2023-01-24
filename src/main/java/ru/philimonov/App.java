@@ -18,10 +18,15 @@ public class App {
 
             Person person = session.get(Person.class, 8);
             System.out.println("We have got a person!");
-            Hibernate.initialize(person.getItemList());
 
             session.getTransaction().commit();
+
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+            person = (Person) session.merge(person);
+            System.out.println("Inside second transaction!");
             System.out.println(person.getItemList());
+            session.getTransaction().commit();
 
         } catch (HibernateException e) {
             throw new RuntimeException(e);
