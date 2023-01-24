@@ -4,25 +4,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.philimonov.model.Actor;
-import ru.philimonov.model.Movie;
+import ru.philimonov.model.Item;
+import ru.philimonov.model.Person;
 
 public class App {
     public static void main(String[] args) {
-        Configuration configuration = new Configuration().addAnnotatedClass(Actor.class).addAnnotatedClass(Movie.class);
+        Configuration configuration = new Configuration().addAnnotatedClass(Person.class).addAnnotatedClass(Item.class);
         SessionFactory factory = configuration.buildSessionFactory();
         try (factory) {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
-
-            Actor actor = session.get(Actor.class, 1);
-            System.out.println(actor.getMovies());
-            Movie movieToRemove = actor.getMovies().get(1);
-
-            actor.getMovies().remove(0);
-            movieToRemove.getActors().remove(actor);
-
+            Person person = session.get(Person.class, 7);
+            System.out.println("We got a person");
+            System.out.println(person.getItemList());
             session.getTransaction().commit();
+
         } catch (HibernateException e) {
             throw new RuntimeException(e);
         }
