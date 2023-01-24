@@ -1,5 +1,6 @@
 package ru.philimonov;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,9 +18,10 @@ public class App {
 
             Person person = session.get(Person.class, 8);
             System.out.println("We have got a person!");
-            System.out.println(person.getItemList());
+            Hibernate.initialize(person.getItemList());
 
             session.getTransaction().commit();
+            System.out.println(person.getItemList());
 
         } catch (HibernateException e) {
             throw new RuntimeException(e);
