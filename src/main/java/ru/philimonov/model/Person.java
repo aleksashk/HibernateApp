@@ -5,6 +5,7 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import java.util.List;
 @Table(name = "Person")
 public class Person {
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<Item> itemList;
 
@@ -36,13 +37,13 @@ public class Person {
     }
 
     public Person(String name, int age) {
-        itemList =  new ArrayList<>();
+        itemList = new ArrayList<>();
         this.name = name;
         this.age = age;
     }
 
-    public void addItem(Item item){
-        if(this.itemList==null){
+    public void addItem(Item item) {
+        if (this.itemList == null) {
             this.itemList = new ArrayList<>();
         }
         this.itemList.add(item);

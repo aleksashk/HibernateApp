@@ -15,9 +15,10 @@ public class App {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
 
-            Item item = session.get(Item.class, 1);
-            System.out.println("We got an item!!!");
-            System.out.println(item.getOwner());
+            Person person = session.get(Person.class, 8);
+            System.out.println("We have got a person!");
+            System.out.println(person.getItemList());
+
             session.getTransaction().commit();
 
         } catch (HibernateException e) {
