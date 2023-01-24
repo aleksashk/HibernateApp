@@ -69,7 +69,6 @@ public class Movie {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", yearOfProduction=" + yearOfProduction +
-                ", actors=" + actors +
                 '}';
     }
 

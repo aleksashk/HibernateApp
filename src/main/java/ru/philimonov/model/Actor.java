@@ -71,7 +71,6 @@ public class Actor {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", movies=" + movies +
                 '}';
     }
 
