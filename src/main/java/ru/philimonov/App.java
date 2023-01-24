@@ -7,9 +7,6 @@ import org.hibernate.cfg.Configuration;
 import ru.philimonov.model.Actor;
 import ru.philimonov.model.Movie;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class App {
     public static void main(String[] args) {
         Configuration configuration = new Configuration().addAnnotatedClass(Actor.class).addAnnotatedClass(Movie.class);
@@ -18,13 +15,12 @@ public class App {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
 
-            Movie movie = new Movie("Reservoir Dogs", 1992);
             Actor actor = session.get(Actor.class, 1);
+            System.out.println(actor.getMovies());
+            Movie movieToRemove = actor.getMovies().get(1);
 
-            movie.setActors(new ArrayList<>(Collections.singletonList(actor)));
-            actor.getMovies().add(movie);
-
-            session.save(movie);
+            actor.getMovies().remove(0);
+            movieToRemove.getActors().remove(actor);
 
             session.getTransaction().commit();
         } catch (HibernateException e) {
